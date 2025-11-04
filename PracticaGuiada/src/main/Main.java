@@ -16,6 +16,7 @@ public class Main {
 		Athlete a2 = new Athlete(2, "Mary", Genre.FEMALE, "UK", LocalDate.of(1997, 6, 24));
 		atletas.add(a1);
 		atletas.add(a2);
+		
 		MainWindow ventana_principal = new MainWindow();
 
 	}
