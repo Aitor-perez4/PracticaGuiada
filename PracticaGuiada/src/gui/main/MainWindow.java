@@ -3,7 +3,12 @@ package gui.main;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -13,6 +18,7 @@ import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -29,7 +35,7 @@ public class MainWindow extends JFrame {
 		
 		this.setTitle("JJ.OO. París 2024");
 		this.setSize(640, 480);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		
 		DefaultListModel<String> modelo_lista = new DefaultListModel<>();
@@ -76,8 +82,34 @@ public class MainWindow extends JFrame {
 		
 		JMenuItem salir = new JMenuItem("Salir...");
 		salir.setMnemonic(KeyEvent.VK_S);
+		salir.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ConfirmarSalida();
+				
+			}
+			
+		});
 		fichero.add(salir);
+		
+		this.addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				ConfirmarSalida();
+			}		
+			});
+		
 		
 		this.setVisible(true);
 }
+	
+	public void ConfirmarSalida() {
+		int opcion =JOptionPane.showConfirmDialog(this, "¿Seguro que desea salir?" , "Salir" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		
+		if (opcion == JOptionPane.YES_OPTION) {
+			System.exit(0);
+		}
+	}
 }
