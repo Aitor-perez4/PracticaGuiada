@@ -1,5 +1,5 @@
 package gui.main;
-
+import main.Main;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-
+import domain.Athlete;
 public class MainWindow extends JFrame {
 
 	/**
@@ -30,21 +30,19 @@ public class MainWindow extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private Athlete[] atletas;
 	
-	public MainWindow() {
+	public MainWindow(Athlete[] atletas) {
 		
 		this.setTitle("JJ.OO. París 2024");
 		this.setSize(640, 480);
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		
-		DefaultListModel<String> modelo_lista = new DefaultListModel<>();
-		JList<String> lista = new JList<>(modelo_lista);
-		
-		
-		for (int i = 0; i < 50; i++) {
-			String nombre = "a" + i;
-			modelo_lista.addElement(nombre);
+		DefaultListModel<Athlete> modelo_lista = new DefaultListModel<>();
+		JList<Athlete> lista = new JList<>(modelo_lista);
+		for (Athlete atleta : atletas) {
+			modelo_lista.addElement(atleta);
 		}
 		JScrollPane scroller = new JScrollPane(lista);
 		scroller.setPreferredSize(new Dimension(200, this.getHeight()));
@@ -82,15 +80,9 @@ public class MainWindow extends JFrame {
 		
 		JMenuItem salir = new JMenuItem("Salir...");
 		salir.setMnemonic(KeyEvent.VK_S);
-		salir.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ConfirmarSalida();
-				
-			}
+		salir.addActionListener(e -> ConfirmarSalida());
 			
-		});
+		
 		fichero.add(salir);
 		
 		this.addWindowListener(new WindowAdapter() {
