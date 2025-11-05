@@ -11,7 +11,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.Iterator;
-
+import gui.AthleteListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -22,6 +22,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.ListCellRenderer;
+
 import domain.Athlete;
 public class MainWindow extends JFrame {
 
@@ -44,6 +46,8 @@ public class MainWindow extends JFrame {
 		for (Athlete atleta : atletas) {
 			modelo_lista.addElement(atleta);
 		}
+		lista.setCellRenderer(new AthleteListCellRenderer());
+		
 		JScrollPane scroller = new JScrollPane(lista);
 		scroller.setPreferredSize(new Dimension(200, this.getHeight()));
 		this.add(scroller, BorderLayout.WEST);
